@@ -1,0 +1,45 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Get Tdjson
+      shell: pwsh
+      run: |
+        git clone https://github.com/tdlib/td.git
+        cd td
+    - name: Install Zlib
+      shell: pwsh
+      run: |
+        vcpkg.exe install zlib:x86-windows
+    - name: Build
+      shell: pwsh
+      run: |
+        cd td
+        Remove-Item build -Force -Recurse -ErrorAction SilentlyContinue
+        mkdir build
+        cd build
+        cmake -A Win32 -DCMAKE_INSTALL_PREFIX=../tdlib -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+        cmake --build . --target install --config Release
+    - name: Pack
+      shell: pwsh
+      run: |
+        cd td
+        Compress-Archive -Path tdlib tdlib.zip
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        path: ./td/tdlib.zip
+        
+        
+        
+        
