@@ -21,9 +21,16 @@ jobs:
       shell: pwsh
       run: |
         vcpkg.exe install zlib:x86-windows openssl:x86-windows
+    - name: Install Gperf
+      shell: pwsh
+      run: |
+        mkdir gperf
+        cd gperf
+        https://udomain.dl.sourceforge.net/project/gnuwin32/gperf/3.0.1/gperf-3.0.1.exe
     - name: Build
       shell: pwsh
       run: |
+        $env:Path += ";gperf"  
         cd td
         Remove-Item build -Force -Recurse -ErrorAction SilentlyContinue
         mkdir build
