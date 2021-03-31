@@ -35,7 +35,7 @@ jobs:
         Remove-Item build -Force -Recurse -ErrorAction SilentlyContinue
         mkdir build
         cd build
-        cmake -A Win32 -DCMAKE_INSTALL_PREFIX=../tdlib -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+        cmake -A Win32 -DCMAKE_INSTALL_PREFIX=../tdlib -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DGPERF_EXECUTABLE=../../gperf/gperf.exe ..
         cmake --build . --target install --config Release
     - name: Pack
       shell: pwsh
