@@ -26,11 +26,10 @@ jobs:
       run: |
         mkdir gperf
         cd gperf
-        wget https://udomain.dl.sourceforge.net/project/gnuwin32/gperf/3.0.1/gperf-3.0.1.exe
+        Invoke-WebRequest https://udomain.dl.sourceforge.net/project/gnuwin32/gperf/3.0.1/gperf-3.0.1.exe -OutFile gperf.exe
     - name: Build
       shell: pwsh
       run: |
-        $env:Path += ";gperf"  
         cd td
         Remove-Item build -Force -Recurse -ErrorAction SilentlyContinue
         mkdir build
