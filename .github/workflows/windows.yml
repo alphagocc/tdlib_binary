@@ -39,12 +39,11 @@ jobs:
     - name: Pack
       shell: pwsh
       run: |
-        cd td
-        Compress-Archive -Path tdlib tdlib.zip
+        Compress-Archive -Path .\td\ td.zip
     - name: Upload artifact
       uses: actions/upload-artifact@v2.2.2
       with:
-        path: ./td/tdlib.zip
+        path: .\td.zip
         
         
         
