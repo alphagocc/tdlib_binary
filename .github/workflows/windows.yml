@@ -17,11 +17,15 @@ jobs:
       run: |
         git clone https://github.com/tdlib/td.git
         cd td
-    - name: Install Gperf
+    - name: Install Gperf PHP
       shell: pwsh
-      run: choco install gperf
+      run: |
+        choco install gperf
+        choco uninstall php
     - name: Test Gperf
       run: gperf --version
+    - name: Test PHP
+      run: php --version
     - name: Install Zlib Openssl
       shell: pwsh
       run: |
