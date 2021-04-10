@@ -17,16 +17,15 @@ jobs:
       run: |
         git clone https://github.com/tdlib/td.git
         cd td
+    - name: Install Gperf
+      shell: pwsh
+      run: choco install gperf
+    - name: Test Gperf
+      run: gperf --version
     - name: Install Zlib Openssl
       shell: pwsh
       run: |
         vcpkg.exe install zlib:x86-windows openssl:x86-windows
-    - name: Install Gperf
-      shell: pwsh
-      run: |
-        mkdir gperf
-        cd gperf
-        Invoke-WebRequest https://udomain.dl.sourceforge.net/project/gnuwin32/gperf/3.0.1/gperf-3.0.1.exe -OutFile gperf.exe
     - name: Build
       shell: pwsh
       run: |
