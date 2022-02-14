@@ -43,7 +43,7 @@ jobs:
       run: |
         Compress-Archive -Path .\td\ td.zip
     - name: Upload artifact
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@v2
       with:
         path: .\td.zip
         
